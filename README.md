@@ -16,7 +16,7 @@ Para mais referências, considere as seguintes seções:
 Os guias a seguir ilustram como usar alguns recursos concretamente:
 
 * [Construindo um Web Service RESTful](https://spring.io/guides/gs/rest-service/)
-* [Servindo conteúdo da Web com Spring MVC](https://spring.io/guides/gs/servindo-web-content/)
+* [Servindo conteúdo da Web com Spring MVC](https://spring.io/guides/gs/serving-web-content/)
 * [Construindo serviços REST com Spring](https://spring.io/guides/tutorials/rest/)
 * [Acessando dados com JPA](https://spring.io/guides/gs/accessing-data-jpa/)
 * [Acessando dados relacionais usando JDBC com Spring](https://spring.io/guides/gs/relational-data-access/)
