@@ -19,7 +19,7 @@ import jakarta.persistence.EntityManagerFactory;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories("com.ufrn.pds.postocerto.config")
+@EnableJpaRepositories("com.ufrn.pds.postocerto.repository")
 public class DatabaseConfig {
 
   @Autowired
