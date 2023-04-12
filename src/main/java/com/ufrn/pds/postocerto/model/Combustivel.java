@@ -30,5 +30,4 @@ public class Combustivel {
     public String getName() {
         return name;
     }
-
 }

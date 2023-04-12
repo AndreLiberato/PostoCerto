@@ -11,7 +11,6 @@ public class Usuario {
     @GeneratedValue
     private Long id;
     private String name;
-    private String password;
     private String latitude;
     private String longitude;
 
@@ -21,26 +20,25 @@ public class Usuario {
 
     public Usuario(String name, String password) {
         this.name = name;
-        this.password = password;
     }
 
     public Usuario(String name, String password, String latitude, String longitude) {
         this.name = name;
-        this.password = password;
         this.latitude = latitude;
         this.longitude = longitude;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setName(String name) {
         this.name = name;
     }
-    public void setPassword(String password) { this.password = password; }
-    public void setLatitude(String latitude) { this.latitude = latitude; }
-    public void setLongitude(String longitude) { this.longitude = longitude; }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
 
     public Long getId() {
         return id;
@@ -49,7 +47,12 @@ public class Usuario {
     public String getName() {
         return name;
     }
-    public String getLatitude() { return latitude;}
-    public String getLongitude() { return longitude;}
 
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
 }

@@ -9,5 +9,4 @@ public class PostocertoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PostocertoApplication.class, args);
 	}
-
 }
