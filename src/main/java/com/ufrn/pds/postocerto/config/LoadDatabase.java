@@ -16,11 +16,13 @@ public class LoadDatabase {
   private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
   @Bean
-  CommandLineRunner initDatabase(PostoRepository repository, UsuarioRepository usuarioR) {
+  CommandLineRunner initDatabase(PostoRepository repository) {
 
     return args -> {
-      // log.info("Preloading " + repository.save(new Posto("Bilbo Baggins")));
-      // log.info("Preloading " + repository.save(new Posto("Frodo Baggins")));
+      log.info("Preloading " + repository.save(new Posto("São Paulo", "-23.5505", "-46.6333", 0.0)));
+      log.info("Preloading " + repository.save(new Posto("Londres", "51.5074", "-0.1278", 0.0)));
+      log.info("Preloading " + repository.save(new Posto("Nova York", "40.7128", "-74.0060", 0.0)));
+
 
       // log.info("Preloading " + usuarioR.save(new Usuario("André")));
       // log.info("Preloading " + usuarioR.save(new Usuario("nsdaiofjhasdj")));

@@ -13,6 +13,7 @@ public class Posto {
     private String nome;
     private String latitude;
     private String longitude;
+    private double distancia;
 
     Posto() {
         // Empty
@@ -20,6 +21,13 @@ public class Posto {
 
     public Posto(String nome) {
         this.nome = nome;
+    }
+
+    public Posto(String nome, String latitude, String longitude, double distancia) {
+        this.nome = nome;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.distancia = distancia;
     }
 
     public void setNome(String nome) {
@@ -32,6 +40,10 @@ public class Posto {
 
     public void setLongitude(String longitude) {
         this.longitude = longitude;
+    }
+
+    public void setDistancia(double distancia) {
+      this.distancia = distancia;
     }
 
     public Long getId() {
@@ -48,5 +60,9 @@ public class Posto {
 
     public String getLongitude() {
         return longitude;
+    }
+
+    public double getDistancia() {
+      return distancia;
     }
 }
