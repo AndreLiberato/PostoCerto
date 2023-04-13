@@ -1,12 +1,12 @@
 package com.ufrn.pds.postocerto.service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import org.apache.logging.log4j.util.PropertySource.Comparator;
+import java.util.Optional;
+
+import com.ufrn.pds.postocerto.model.Posto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ufrn.pds.postocerto.model.Posto;
 import com.ufrn.pds.postocerto.repository.PostoRepository;
 
 @Service
@@ -17,6 +17,26 @@ public class PostoService {
 
     PostoService(PostoRepository postoRepository) {
         this.postoRepository = postoRepository;
+    }
+    public List<Posto> findAll() {
+        return postoRepository.findAll();
+    }
+
+    public Posto save(Posto novoPosto) {
+        return postoRepository.save(novoPosto);
+    }
+
+    public Optional<Posto> findById(Long id) {
+        return postoRepository.findById(id);
+    }
+
+    
+    public Posto update(Posto PostoAlterado, Long id) {
+        Optional<Posto> Posto = postoRepository.findById(id);
+        Posto.get().setNome(PostoAlterado.getNome());
+        Posto.get().setLatitude(PostoAlterado.getLatitude());
+        Posto.get().setLongitude(PostoAlterado.getLongitude());
+        return postoRepository.save(Posto.get());
     }
 
     public List<Posto> mostrarPostosMaisProximos(double latAtual, double lngAtual) {
