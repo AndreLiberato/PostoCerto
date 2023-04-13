@@ -1,5 +1,7 @@
 package com.ufrn.pds.postocerto.model;
 
+import io.micrometer.common.lang.NonNull;
+import io.micrometer.common.lang.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -10,7 +12,7 @@ public class Usuario {
     @Id
     @GeneratedValue
     private Long id;
-    private String name;
+    private String nome;
     private String latitude;
     private String longitude;
 
@@ -18,18 +20,18 @@ public class Usuario {
         // Empty
     }
 
-    public Usuario(String name, String password) {
-        this.name = name;
+    public Usuario(String nome) {
+        this.nome = nome;
     }
 
-    public Usuario(String name, String password, String latitude, String longitude) {
-        this.name = name;
+    public Usuario(String nome, String latitude, String longitude) {
+        this.nome = nome;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public void setLatitude(String latitude) {
@@ -44,8 +46,8 @@ public class Usuario {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
     public String getLatitude() {

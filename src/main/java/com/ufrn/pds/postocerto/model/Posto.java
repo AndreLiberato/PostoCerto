@@ -10,7 +10,7 @@ public class Posto {
     @Id
     @GeneratedValue
     private Long id;
-    private String name;
+    private String nome;
     private String latitude;
     private String longitude;
 
@@ -18,12 +18,12 @@ public class Posto {
         // Empty
     }
 
-    public Posto(String name) {
-        this.name = name;
+    public Posto(String nome) {
+        this.nome = nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public void setLatitude(String latitude) {
@@ -38,8 +38,8 @@ public class Posto {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
     public String getLatitude() {

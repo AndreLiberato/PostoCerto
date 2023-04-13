@@ -10,24 +10,24 @@ public class Combustivel {
     @Id
     @GeneratedValue
     private Long id;
-    private String name;
+    private String nome;
 
     Combustivel() {
         // Empty
     }
-    public Combustivel(String name) {
-        this.name = name;
+    public Combustivel(String nome) {
+        this.nome = nome;
     }
     public void setId(Long id) {
         this.id = id;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
     public Long getId() {
         return id;
     }
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 }
