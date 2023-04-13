@@ -6,9 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.ufrn.pds.postocerto.model.Posto;
-import com.ufrn.pds.postocerto.model.Usuario;
 import com.ufrn.pds.postocerto.repository.PostoRepository;
-import com.ufrn.pds.postocerto.repository.UsuarioRepository;
 
 @Configuration
 public class LoadDatabase {
