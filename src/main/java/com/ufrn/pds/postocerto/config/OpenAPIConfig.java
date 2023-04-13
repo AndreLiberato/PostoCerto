@@ -8,25 +8,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class SpringFoxConfig {
-//    @Bean
-//    public Docket api() {
-//        return new Docket(DocumentationType.SWAGGER_2)
-//                .select()
-//                .apis(RequestHandlerSelectors.any())
-//                .paths(PathSelectors.any())
-//                .build();
-//    }
+public class OpenAPIConfig {
 @Bean
-public OpenAPI springShopOpenAPI() {
+public OpenAPI postocertoOpenAPI() {
     return new OpenAPI()
-            .info(new Info().title("SpringShop API")
-                    .description("Spring shop sample application")
+            .info(new Info().title("Postocerto API")
+                    .description("PostoCerto - Uma plataforma que facilita o encontro de melhores postos de combustíveis")
                     .version("v0.0.1")
                     .license(new License().name("Apache 2.0").url("http://springdoc.org")))
             .externalDocs(new ExternalDocumentation()
-                    .description("SpringShop Wiki Documentation")
-                    .url("https://springshop.wiki.github.org/docs"));
+                    .description("Repositorio do projeto")
+                    .url("https://github.com/AndreLiberato/PostoCerto"));
 }
 
 
