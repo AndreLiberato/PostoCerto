@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Postos de Combustível</title>
+</head>
+<body>
+    <h1>Postos de Combustível</h1>
+    <table>
+        <thead>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Distância</th>
+        </thead>
+        <tbody>
+            <tr th:each="posto : ${postos}">
+                <td th:text="${posto.id}"></td>
+                <td th:text="${posto.nome}"></td>
+                <td th:text="${posto.latitude}"></td>
+                <td th:text="${posto.longitude}"></td>
+                <td th:text="${posto.distancia}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
