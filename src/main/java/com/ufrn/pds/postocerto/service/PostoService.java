@@ -18,7 +18,7 @@ public class PostoService {
     PostoService(PostoRepository postoRepository) {
         this.postoRepository = postoRepository;
     }
-    public List<Posto> findAll() {
+    public List<Posto> all() {
         return postoRepository.findAll();
     }
 
