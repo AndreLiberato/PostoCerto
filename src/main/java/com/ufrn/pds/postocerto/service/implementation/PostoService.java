@@ -38,7 +38,6 @@ public class PostoService implements IPostoService {
         Optional<Posto> posto = postoRepository.findById(id);
         if (posto.isPresent()) {
             postoRepository.delete(posto.get());
-            ;
         } else {
             throw new EntityNotFoundException(id);
         }

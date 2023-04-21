@@ -4,43 +4,52 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.ufrn.pds.postocerto.exception.EntityNotFoundException;
 import com.ufrn.pds.postocerto.model.Combustivel;
 import com.ufrn.pds.postocerto.repository.CombustivelRepository;
 import com.ufrn.pds.postocerto.service.ICombustivelService;
 
 @Service
 public class CombustivelService implements ICombustivelService {
- 
+	
+	 
     @Autowired
 	private CombustivelRepository combustivelRepository;
 
     public List<Combustivel> getAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        return combustivelRepository.findAll();
     }
 
     public Optional<Combustivel> find(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'find'");
+        return combustivelRepository.findById(id);
     }
 
     public List<Combustivel> find(List<Long> id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'find'");
+       return combustivelRepository.findAllById(id);
     }
 
     public Combustivel save(Combustivel novo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+        return combustivelRepository.save(novo);
     }
 
     public Combustivel update(Combustivel novo, Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    	Optional<Combustivel> existingCombustivel = combustivelRepository.findById(id);
+    	if(existingCombustivel.isPresent()) {
+    		existingCombustivel.get().setNome(novo.getNome());
+    	
+    	} else {
+    		throw new EntityNotFoundException(id);
+    	}
+		return combustivelRepository.save(existingCombustivel.get());
     }
 
     public void delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    	Optional<Combustivel> combustivel = combustivelRepository.findById(id);
+    	if(combustivel.isPresent()) {
+    		combustivelRepository.delete(combustivel.get());
+    	} else {
+    		 throw new EntityNotFoundException(id);
+    	}
     }
 }
