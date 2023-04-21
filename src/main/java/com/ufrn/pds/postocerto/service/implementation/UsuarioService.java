@@ -4,9 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.ufrn.pds.postocerto.exception.EntityNotFoundException;
 import com.ufrn.pds.postocerto.model.Usuario;
 import com.ufrn.pds.postocerto.repository.UsuarioRepository;
 import com.ufrn.pds.postocerto.service.IUsuarioService;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class UsuarioService implements IUsuarioService{
@@ -15,32 +19,43 @@ public class UsuarioService implements IUsuarioService{
     private UsuarioRepository usuarioRepository;
 
     public List<Usuario> getAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        return usuarioRepository.findAll();
     }
 
     public Optional<Usuario> find(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'find'");
+        return usuarioRepository.findById(id);
     }
 
     public List<Usuario> find(List<Long> id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'find'");
+        return usuarioRepository.findAllById(id);
     }
 
+    @Transactional
     public Usuario save(Usuario novo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+        return usuarioRepository.save(novo);
     }
-
+    
+    @Transactional
     public Usuario update(Usuario novo, Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        Optional<Usuario>  existingUsuario = usuarioRepository.findById(id);
+        if (existingUsuario.isPresent()){
+            existingUsuario.get().setNome(novo.getNome());
+            existingUsuario.get().setLatitude(novo.getLatitude());
+            existingUsuario.get().setLongitude(novo.getLongitude());
+        } else {
+            throw new EntityNotFoundException(id);
+        }
+        return usuarioRepository.save(existingUsuario.get());
     }
 
-    public void delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    @Transactional
+    public void delete(Long id) { 
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
+        if (usuario.isPresent()) {
+            usuarioRepository.delete(usuario.get());
+            ;
+        } else {
+            throw new EntityNotFoundException(id);
+        }    
     }
 }
