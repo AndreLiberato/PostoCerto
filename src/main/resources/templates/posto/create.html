@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html th:replace="~{template :: layout (~{:: main}, 'Criar novo Posto', ~{})}">
+
+<main>
+    <form action="#" method="post" th:action="@{/posto/store}" th:object="${posto}">
+
+        <label for="nome-input">Nome</label>
+        <input type="text" name="nome" id="nome-input">
+        <br>
+        <label for="latitude-input">Latitude</label>
+        <input type="text" name="latitude" id="latitude-input">
+        <br>
+        <label for="longitude-input">Longitude</label>
+        <input type="text" name="longitude" id="longitude-input">
+        <br>
+        <label for="distancia-input">Distância</label>
+        <input type="text" name="distancia" id="distancia-input">
+        <br>
+        <button type="submit">Salvar</button>
+    </form>
+</main>
+
+</html>

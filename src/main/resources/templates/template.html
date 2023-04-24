@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(content, title, scripts)">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- JQuery -->
+    <script th:src="@{/node_modules/jquery/dist/jquery.min.js}"></script>
+    <!-- Bootstrap.js -->
+    <script th:src="@{/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+    <!-- Bootstrap.css -->
+    <link rel="stylesheet" th:href="@{/node_modules/bootstrap/dist/css/bootstrap.min.css}" />
+
+    <title th:if="${title}" th:text="${title}"></title>
+</head>
+
+<body>
+    <header>
+
+    </header>
+
+    <main th:include="${content}">
+
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <script th:if="${scripts}" th:include="${scripts}">
+
+    </script>
+</body>
+
+</html>

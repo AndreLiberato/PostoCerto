@@ -17,7 +17,7 @@
         <h1>PostoCerto</h1>
     </header>
     <ul>
-        <li><a href="/posto">Postos</a></li>
+        <li><a href="/posto/index">Postos</a></li>
     </ul>
 
     <div id='map' style='width: 800px; height: 600px;'></div>
@@ -38,13 +38,23 @@
             customAttribution: 'PostoCerto'
         }));
 
-        map.addControl(new mapboxgl.GeolocateControl({
+        let geolocate = new mapboxgl.GeolocateControl({
             positionOptions: {
                 enableHighAccuracy: true
             },
             trackUserLocation: true,
             showUserHeading: true
-        }));
+        });
+
+        map.addControl(geolocate);
+
+        map.on('load', () => {
+            geolocate.trigger();
+        });
+
+        geolocate.on('geolocate', (e) => {
+            console.log(e.coords);
+        });
 
         const marker = new mapboxgl.Marker()
             .setLngLat([-35.21150448207374, -5.838191694648373])
