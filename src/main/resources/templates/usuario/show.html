@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html th:replace="~{template :: layout (~{:: main}, 'Detalhe do Usuário', ~{})}">
+
+<main>
+    <h1>Informação do Usuário</h1>
+
+    <h1 th:text="${error}? ${error} : ''"></h1>
+
+    <div th:if="${usuario} != null">
+        <ul>
+            <li th:text="${usuario.id}"></li>
+            <li th:text="${usuario.nome}"></li>
+            <li th:text="${usuario.latitude}"></li>
+            <li th:text="${usuario.longitude}"></li>
+        </ul>
+    </div>
+</main>
+
+</html>

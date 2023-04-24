@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html th:replace="~{template :: layout (~{:: main}, 'Editar Usuário', ~{})}">
+
+<main>
+    <form th:method="put" th:action="@{/usuario/{id}/update(id=${usuario.id})}" th:object="${usuario}">
+        <label for="nome-input">Nome</label>
+        <input th:field="*{nome}" type="text" name="nome" id="nome-input">
+        <br>
+        <label for="latitude-input">Latitude</label>
+        <input th:field="*{latitude}" type="text" name="latitude" id="latitude-input">
+        <br>
+        <label for="longitude-input">Longitude</label>
+        <input th:field="*{longitude}" type="text" name="longitude" id="longitude-input">
+        <br>
+        <button type="submit">Salvar</button>
+    </form>
+</main>
+</html>
