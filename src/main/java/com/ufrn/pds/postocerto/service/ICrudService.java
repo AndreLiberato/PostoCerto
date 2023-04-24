@@ -3,17 +3,17 @@ package com.ufrn.pds.postocerto.service;
 import java.util.List;
 import java.util.Optional;
 
-public interface CrudService<T, ID> {
+public interface ICrudService<T, ID> {
 
     public List<T> getAll();
 
     public Optional<T> find(ID id);
 
-    public List<T> find(List<ID> id);
+    public List<T> find(List<ID> ids);
 
-    public T save(T novo);
+    public T save(T entityT);
 
-    public T update(T novo, ID id);
+    public T update(T entityT, ID id);
 
     public void delete(ID id);   
 }

@@ -50,6 +50,7 @@ public class PostoService implements IPostoService {
             existingPosto.get().setNome(newPosto.getNome());
             existingPosto.get().setLatitude(newPosto.getLatitude());
             existingPosto.get().setLongitude(newPosto.getLongitude());
+            existingPosto.get().setDistancia(newPosto.getDistancia());
         } else {
             throw new EntityNotFoundException(id);
         }
