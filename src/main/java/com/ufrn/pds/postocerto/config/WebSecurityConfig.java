@@ -12,10 +12,11 @@ public class WebSecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .authorizeHttpRequests((requests) -> requests
-                    .requestMatchers("/**").permitAll()
-                    .anyRequest().authenticated());
+        http.authorizeHttpRequests((requests) -> requests
+                .requestMatchers("/**")
+                .permitAll()
+                .anyRequest()
+                .authenticated());
 
         return http.build();
     }
