@@ -15,7 +15,7 @@ import com.ufrn.pds.postocerto.model.Preco;
 import com.ufrn.pds.postocerto.service.IPrecoService;
 
 @RestController
-public class PrecoController implements CrudController<Preco, Long>{
+public class PrecoController implements ICrudController<Preco, Long>{
     
     @Autowired
     private IPrecoService service;

@@ -1,8 +1,5 @@
 package com.ufrn.pds.postocerto.controller;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,56 +9,49 @@ import org.springframework.ui.Model;
 
 @Controller
 @RequestMapping("/posto")
-public class PostoController implements CrudController<Posto, Long> {
+public class PostoController implements ICrudController<Posto, Long> {
 
     @Autowired()
     private IPostoService postoService;
 
-    @GetMapping()
+    @GetMapping("/index")
     public String index(Model model) {
-        List<Posto> postos = postoService.getAll();
-        model.addAttribute("postos", postos);
+        model.addAttribute("postos", postoService.getAll());
         return "posto/index";
     }
 
     @GetMapping("/create")
     public String create(Model model) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+        return "/posto/create";
     }
 
-    @PostMapping()
+    @PostMapping("/store")
     public String store(@ModelAttribute Posto entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'store'");
+        postoService.save(entity);
+        return "redirect:/posto/index";
     }
 
-    @GetMapping("/{id}")
-    public String show(Model model, @PathVariable(value = "id") Long id) {
-        Optional<Posto> posto = postoService.find(id);
-        if (!posto.isPresent()) {
-            model.addAttribute("error", "Entidade não encontrada!");
-        } else {
-            model.addAttribute("posto", posto.get());
-        }
+    @GetMapping("/{id}/show")
+    public String show(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("posto", postoService.find(id).get());
         return "posto/show";
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'edit'");
+    public String edit(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("posto", postoService.find(id).get());
+        return "posto/edit";
     }
 
-    @PutMapping("/{id}")
-    public String update(@ModelAttribute Posto entity, @PathVariable Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    @PutMapping("/{id}/update")
+    public String update(@ModelAttribute Posto entity, @PathVariable("id") Long id) {
+        postoService.update(entity, id);
+        return "redirect:/posto/index";
     }
 
-    @DeleteMapping("/{id}")
-    public String delete(@PathVariable Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    @DeleteMapping("/{id}/delete")
+    public String delete(@PathVariable("id") Long id) {
+        postoService.delete(id);
+        return "redirect:/posto/index";
     }
 }

@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
 
-public interface CrudController<T, ID> {
+public interface ICrudController<T, ID> {
 
     String index(Model model);
 

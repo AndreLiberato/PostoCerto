@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UsuarioController implements CrudController<Usuario, Long>{
+public class UsuarioController implements ICrudController<Usuario, Long>{
 
     @Autowired
     private UsuarioService service;

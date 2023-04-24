@@ -15,7 +15,7 @@ import com.ufrn.pds.postocerto.model.Combustivel;
 import com.ufrn.pds.postocerto.service.implementation.CombustivelService;
 
 @RestController
-public class CombustivelController implements CrudController<Combustivel, Long>{
+public class CombustivelController implements ICrudController<Combustivel, Long>{
     
     @Autowired
     private CombustivelService service;
