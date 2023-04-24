@@ -1,58 +1,58 @@
 package com.ufrn.pds.postocerto.controller;
 
 import com.ufrn.pds.postocerto.model.Usuario;
-import com.ufrn.pds.postocerto.service.implementation.UsuarioService;
-
-import java.util.List;
-import java.util.Optional;
+import com.ufrn.pds.postocerto.service.IUsuarioService;
+import org.springframework.ui.Model;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class UsuarioController implements ICrudController<Usuario, Long>{
+@RequestMapping("/usuario")
+public class UsuarioController implements ICrudController<Usuario, Long> {
 
     @Autowired
-    private UsuarioService service;
+    private IUsuarioService usuarioService;
 
+    @GetMapping("/index")
     public String index(Model model) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'index'");
+        model.addAttribute("usuarios", usuarioService.getAll());
+        return "usuario/index";
     }
 
+    @GetMapping("/create")
     public String create(Model model) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+        return "/usuario/create";
     }
 
+    @PostMapping("/store")
     public String store(Usuario entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'store'");
+        usuarioService.save(entity);
+        return "redirect:/usuario/index";
     }
 
-    public String show(Model model, Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'show'");
+    @GetMapping("/{id}/show")
+    public String show(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("usuario", usuarioService.find(id).get());
+        return "usuario/show";
+    }
+    
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("usuario", usuarioService.find(id).get());
+        return "usuario/edit";
     }
 
-    public String edit(Model model, Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'edit'");
+    @PutMapping("{id}/update")
+    public String update(Usuario entity, @PathVariable("id") Long id) {
+        usuarioService.update(entity, id);
+        return "redirect:/usuario/index";
     }
 
-    public String update(Usuario entity, Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    @DeleteMapping("{id}/delete")
+    public String delete(@PathVariable("id") Long id) {
+        usuarioService.delete(id);
+        return "redirect:/usuario/index";
     }
-
-    public String delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }
-} 
+}
