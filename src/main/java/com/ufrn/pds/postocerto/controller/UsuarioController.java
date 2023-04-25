@@ -4,7 +4,6 @@ import com.ufrn.pds.postocerto.model.Usuario;
 import com.ufrn.pds.postocerto.service.IUsuarioService;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -36,7 +35,7 @@ public class UsuarioController implements ICrudController<Usuario, Long> {
         model.addAttribute("usuario", usuarioService.find(id).get());
         return "usuario/show";
     }
-    
+
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id) {
         model.addAttribute("usuario", usuarioService.find(id).get());
