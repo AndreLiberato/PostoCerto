@@ -8,25 +8,39 @@ import jakarta.persistence.Id;
 @Entity
 public class Preco {
 
-    @Id
-    @GeneratedValue
-    private Long id;
-    private double valor;
-    private LocalDateTime dataHora;
+  @Id
+  @GeneratedValue
+  private Long id;
+  private double valor;
+  private String dataHora;
 
-    public void setValor(double valor) {
-      this.valor = valor;
-    }
+  public Preco() {
 
-    public void setDataHora(LocalDateTime dataHora) {
-      this.dataHora = dataHora;
-    }
+  }
 
-    public double getValor() {
-      return valor;
-    }
+  public Preco(double valor, String dataHora) {
+    this.valor = valor;
+    this.dataHora = dataHora;
+  }
 
-    public LocalDateTime getDataHora() {
-      return dataHora;
-    }
+  public Long getId() {
+    return id;
+  }
+
+  public void setValor(double valor) {
+    this.valor = valor;
+  }
+
+  public void setDataHora(String string) {
+	  
+    this.dataHora = string.toString();
+  }
+
+  public double getValor() {
+    return valor;
+  }
+
+  public String getDataHora() {
+    return dataHora;
+  }
 }

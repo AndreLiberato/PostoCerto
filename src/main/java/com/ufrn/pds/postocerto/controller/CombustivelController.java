@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
 import com.ufrn.pds.postocerto.model.Combustivel;
 import com.ufrn.pds.postocerto.service.ICombustivelService;
 
@@ -22,7 +22,7 @@ public class CombustivelController implements ICrudController<Combustivel, Long>
 
     @GetMapping("/index")
     public String index(Model model) {
-        model.addAttribute("combustivel", combustivelService.getAll());
+        model.addAttribute("combustiveis", combustivelService.getAll());
         return "combustivel/index";
     }
 

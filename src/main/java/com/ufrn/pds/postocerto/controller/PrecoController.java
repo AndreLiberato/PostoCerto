@@ -39,13 +39,13 @@ public class PrecoController implements ICrudController<Preco, Long> {
     @GetMapping("/{id}/show")
     public String show(Model model, @PathVariable("id") Long id) {
         model.addAttribute("preco", precoService.find(id).get());
-        return "/{id}/show";
+        return "preco/show";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id) {
         model.addAttribute("preco", precoService.find(id).get());
-        return "combustivel/preco/edit";
+        return "preco/edit";
     }
 
     @PutMapping("/{id}/update")

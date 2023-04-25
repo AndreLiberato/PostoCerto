@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html th:replace="~{template :: layout (~{:: main}, 'Criar novo Nome', ~{})}">
+<html th:replace="~{template :: layout (~{:: main}, 'Criar novo Combustivel', ~{})}">
 
 <main>
-    <form action="#" method="post" th:action="@{/nome/store}" th:object="${nome}">
+    <form action="#" method="post" th:action="@{/combustivel/store}" th:object="${combustivel}">
         
         <label for="nome-input">nome</label>
         <input type="text" name="nome" id="nome-input">
