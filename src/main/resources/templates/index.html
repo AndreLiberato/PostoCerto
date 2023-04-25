@@ -6,23 +6,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- MapBox.js -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+    <!-- MapBox.css -->
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+    <!-- JQuery -->
+    <script th:src="@{/node_modules/jquery/dist/jquery.min.js}"></script>
+    <!-- Bootstrap.js -->
+    <script th:src="@{/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+    <!-- Bootstrap.css -->
+    <link rel="stylesheet" th:href="@{/node_modules/bootstrap/dist/css/bootstrap.min.css}" />
+
+    <style>
+        :root {
+            --cor-primaria: #F20519;
+            --cor-secundaria: #385773;
+            --cor-terciaria: #F29F05;
+            --cor-quaternaria: #0D0D0D;
+        }
+    </style>
 
     <title>Index</title>
 </head>
 
 <body>
     <header>
-        <h1>PostoCerto</h1>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: var(--cor-terciaria);">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/" style="color: var(--cor-quaternaria);">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/posto/index" style="color: var(--cor-quaternaria);">Postos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/usuario/index" style="color: var(--cor-quaternaria);">Usuários</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </header>
-    <ul>
-        <li><a href="/posto/index">Postos</a></li>
-        <li><a href="/usuario/index">Usuarios</a></li>
-    </ul>
 
-    <div id='map' style='width: 800px; height: 600px;'></div>
-    <pre id="info"></pre>
+    <main>
+        <div class="d-flex justify-content-center p-3">
+            <div id='map' style='width: 800px; height: 600px;'></div>
+        </div>
+        <pre id="info"></pre>
+    </main>
 
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kcmVsaWJlcmF0byIsImEiOiJjbGdjaDVjbTkwYWliM2VzOWJ6d3d1bm1wIn0.tC0xAy1fcBI9XQS8RimVMg';
