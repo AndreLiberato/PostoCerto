@@ -1,57 +1,62 @@
 package com.ufrn.pds.postocerto.controller;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ufrn.pds.postocerto.model.Combustivel;
-import com.ufrn.pds.postocerto.service.implementation.CombustivelService;
+import com.ufrn.pds.postocerto.service.ICombustivelService;
 
 @RestController
-public class CombustivelController implements ICrudController<Combustivel, Long>{
-    
+@RequestMapping("/posto")
+public class CombustivelController implements ICrudController<Combustivel, Long> {
+
     @Autowired
-    private CombustivelService service;
+    private ICombustivelService combustivelService;
 
+    @GetMapping("/combustivel")
     public String index(Model model) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'index'");
+        model.addAttribute("usuarios", combustivelService.getAll());
+        return "combustivel/index";
     }
 
+    @GetMapping("/create")
     public String create(Model model) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+        return "/combustivel/create";
     }
 
+    @PostMapping("/store")
     public String store(Combustivel entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'store'");
+        combustivelService.save(entity);
+        return "redirect:/combustivel/index";
     }
 
-    public String show(Model model, Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'show'");
+    @GetMapping("/{id}/show")
+    public String show(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("usuario", combustivelService.find(id).get());
+        return "combustivel/show";
     }
 
-    public String edit(Model model, Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'edit'");
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("usuario", combustivelService.find(id).get());
+        return "combustivel/edit";
     }
 
-    public String update(Combustivel entity, Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    @PutMapping("{id}/update")
+    public String update(Combustivel entity, @PathVariable("id") Long id) {
+        combustivelService.update(entity, id);
+        return "redirect:/combustivel/index";
     }
 
+    @DeleteMapping("/{id}/delete")
     public String delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        combustivelService.delete(id);
+        return "redirect:/combustivel/index";
     }
 }
