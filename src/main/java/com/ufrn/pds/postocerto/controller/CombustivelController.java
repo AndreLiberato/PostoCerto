@@ -1,6 +1,7 @@
 package com.ufrn.pds.postocerto.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,16 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ufrn.pds.postocerto.model.Combustivel;
 import com.ufrn.pds.postocerto.service.ICombustivelService;
 
-@RestController
+@Controller
 @RequestMapping("/combustivel")
 public class CombustivelController implements ICrudController<Combustivel, Long> {
 
     @Autowired
     private ICombustivelService combustivelService;
 
-    @GetMapping("/combustivel")
+    @GetMapping("/index")
     public String index(Model model) {
-        model.addAttribute("usuarios", combustivelService.getAll());
+        model.addAttribute("combustivel", combustivelService.getAll());
         return "combustivel/index";
     }
 
@@ -38,13 +39,13 @@ public class CombustivelController implements ICrudController<Combustivel, Long>
 
     @GetMapping("/{id}/show")
     public String show(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("usuario", combustivelService.find(id).get());
+        model.addAttribute("combustivel", combustivelService.find(id).get());
         return "combustivel/show";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("usuario", combustivelService.find(id).get());
+        model.addAttribute("combustivel", combustivelService.find(id).get());
         return "combustivel/edit";
     }
 

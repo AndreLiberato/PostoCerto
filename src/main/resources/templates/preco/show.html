@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html th:replace="~{template :: layout (~{:: main}, 'Detalhe do preço', ~{})}">
+
+<main>
+    <h1>Informação do Preço</h1>
+
+    <h1 th:text="${error}? ${error} : ''"></h1>
+
+    <div th:if="${preco} != null">
+        <ul>
+            <li th:text="${preco.id}"></li>
+            <li th:text="${preco.nome}"></li>
+            <li th:text="${preco.latitude}"></li>
+            
+        </ul>
+    </div>
+</main>
+
+</html>

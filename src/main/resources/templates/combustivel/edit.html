@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html th:replace="~{template :: layout (~{:: main}, 'Editar combustivel', ~{})}">
+
+<main>
+    <form th:method="put" th:action="@{/combustivel/{id}/update(id=${combustivel.id})}" th:object="${combustivel}">
+        <label for="nome-input">Nome</label>
+        <input th:field="*{nome}" type="text" name="nome" id="nome-input">
+        <br>
+        
+        <button type="submit">Salvar</button>
+    </form>
+</main>
+</html>

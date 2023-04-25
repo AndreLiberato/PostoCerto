@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html th:replace="~{template :: layout (~{:: main}, 'Criar novo Nome', ~{})}">
+
+<main>
+    <form action="#" method="post" th:action="@{/nome/store}" th:object="${nome}">
+        
+        <label for="nome-input">nome</label>
+        <input type="text" name="nome" id="nome-input">
+        <br>
+        
+       
+        <button type="submit">Salvar</button>
+    </form>
+</main>
+
+</html>

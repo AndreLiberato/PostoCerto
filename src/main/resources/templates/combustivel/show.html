@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html th:replace="~{template :: layout (~{:: main}, 'Detalhe do combustivel', ~{})}">
+
+<main>
+    <h1>Informação de combustivel de Combustível</h1>
+
+    <h1 th:text="${error}? ${error} : ''"></h1>
+
+    <div th:if="${combustivel} != null">
+        <ul>
+            <li th:text="${combustivel.id}"></li>
+            <li th:text="${combustivel.nome}"></li>
+          
+        </ul>
+    </div>
+</main>
+
+</html>

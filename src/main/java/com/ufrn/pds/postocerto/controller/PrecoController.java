@@ -1,6 +1,7 @@
 package com.ufrn.pds.postocerto.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,11 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import com.ufrn.pds.postocerto.service.IPrecoService;
 import com.ufrn.pds.postocerto.model.Preco;
 
-@RestController
+@Controller
 @RequestMapping("/preco")
 public class PrecoController implements ICrudController<Preco, Long> {
 
@@ -21,7 +21,7 @@ public class PrecoController implements ICrudController<Preco, Long> {
 
     @GetMapping("/index")
     public String index(Model model) {
-        model.addAttribute("usuarios", precoService.getAll());
+        model.addAttribute("precos", precoService.getAll());
         return "preco/index";
     }
 
@@ -38,13 +38,13 @@ public class PrecoController implements ICrudController<Preco, Long> {
 
     @GetMapping("/{id}/show")
     public String show(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("usuario", precoService.find(id).get());
+        model.addAttribute("preco", precoService.find(id).get());
         return "/{id}/show";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("usuario", precoService.find(id).get());
+        model.addAttribute("preco", precoService.find(id).get());
         return "combustivel/preco/edit";
     }
 
