@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html th:include="~{template :: layout (~{:: mainU}, 'Precos ', ~{:: script})}">
+
+<mainU>
+    <h1>Preços</h1>
+    <a th:href="@{/preco/create}">Novo Preços</a>
+    <table class="table">
+        <thead>
+            <th>#</th>
+            <th>valor</th>
+            <th>data</th>
+        </thead>
+        <tbody>
+            <tr th:each="preco : ${precos}">
+                <td th:text="${preco.id}"></td>
+                <td th:text="${preco.valor}"></td>
+                <td th:text="${preco.dataHora}"></td>
+                <td>
+                    <a class="btn btn-primary" th:href="@{/preco/{id}/show(id=${preco.id})}">Visualizar</a>
+
+                    <a class="btn btn-primary" th:href="@{/preco/{id}/edit(id=${preco.id})}">Editar</a>
+
+                    <a class="btn btn-primary" th:attr="data-entity-id=${preco.id}" data-bs-toggle="modal"
+                        data-bs-target="#confirmActionModal">
+                        Excluir
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirmActionModal" tabindex="-1" aria-labelledby="confirmActionModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="confirmActionModalLabel">Confirmação de ação</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="confirmActionForm" th:method="delete" th:action="@{#}">
+                    <div class="modal-body">
+                        <p>Você deseja tem certeza que deseja excluir este item?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                        <button type="submit" class="btn btn-primary">Sim</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</mainU>
+
+<script>
+    $(() => {
+        $('a[data-bs-target="#confirmActionModal"]').on("click", function () {
+            const id = $(this).attr("data-entity-id");
+            const action_uri = `/preco/${id}/delete`;
+            $("#confirmActionForm").attr("action", action_uri);
+        });
+    });
+</script>
+
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html th:replace="~{template :: layout (~{:: main}, 'Criar novo Preço', ~{})}">
+
+<main>
+    <form action="#" method="post" th:action="@{/preco/store}" th:object="${preco}">
+        
+        <label for="valor-input">valor</label>
+        <input type="number" name="valor" id="valor-input">
+        <br>
+        <label for="dataHora-input">dataHora</label>
+        <input type="text" name="dataHora" id="dataHora-input">
+        <br>
+       
+        <button type="submit">Salvar</button>
+    </form>
+</main>
+
+</html>

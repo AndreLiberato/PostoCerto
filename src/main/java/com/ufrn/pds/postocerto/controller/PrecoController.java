@@ -1,6 +1,7 @@
 package com.ufrn.pds.postocerto.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,12 +9,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import com.ufrn.pds.postocerto.service.IPrecoService;
 import com.ufrn.pds.postocerto.model.Preco;
 
-@RestController
-@RequestMapping("/posto")
+@Controller
+@RequestMapping("/preco")
 public class PrecoController implements ICrudController<Preco, Long> {
 
     @Autowired
@@ -21,7 +21,7 @@ public class PrecoController implements ICrudController<Preco, Long> {
 
     @GetMapping("/index")
     public String index(Model model) {
-        model.addAttribute("usuarios", precoService.getAll());
+        model.addAttribute("precos", precoService.getAll());
         return "preco/index";
     }
 
@@ -36,26 +36,26 @@ public class PrecoController implements ICrudController<Preco, Long> {
         return "redirect:/preco/index";
     }
 
-    @GetMapping("combustivel/{id}/show")
+    @GetMapping("/{id}/show")
     public String show(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("usuario", precoService.find(id).get());
-        return "combustivel/preco/show";
+        model.addAttribute("preco", precoService.find(id).get());
+        return "preco/show";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("usuario", precoService.find(id).get());
-        return "combustivel/preco/edit";
+        model.addAttribute("preco", precoService.find(id).get());
+        return "preco/edit";
     }
 
-    @PutMapping("/{id}/edit")
+    @PutMapping("/{id}/update")
     public String update(Preco entity, @PathVariable("id") Long id) {
         precoService.update(entity, id);
         return "redirect:/preco/index";
     }
 
     @DeleteMapping("/{id}/delete")
-    public String delete(Long id) {
+    public String delete(@PathVariable("id") Long id) {
         precoService.delete(id);
         return "redirect:/preco/index";
     }

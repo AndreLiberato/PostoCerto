@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html th:replace="~{template :: layout (~{:: main}, 'Editar preco', ~{})}">
+
+<main>
+    <form th:method="put" th:action="@{/preco/{id}/update(id=${preco.id})}" th:object="${preco}">
+        <label for="nome-input">Valor</label>
+        <input th:field="*{valor}" type="number" name="valor" id="valor-input">
+        <br>
+        <label for="dataHora-input">dataHora</label>
+        <input th:field="*{dataHora}" type="text" name="dataHora" id="dataHora-input">
+        <br>
+       
+        
+        <button type="submit">Salvar</button>
+    </form>
+</main>
+</html>
