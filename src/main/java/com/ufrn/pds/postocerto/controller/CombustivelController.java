@@ -13,7 +13,7 @@ import com.ufrn.pds.postocerto.model.Combustivel;
 import com.ufrn.pds.postocerto.service.ICombustivelService;
 
 @RestController
-@RequestMapping("/posto")
+@RequestMapping("/combustivel")
 public class CombustivelController implements ICrudController<Combustivel, Long> {
 
     @Autowired
@@ -55,7 +55,7 @@ public class CombustivelController implements ICrudController<Combustivel, Long>
     }
 
     @DeleteMapping("/{id}/delete")
-    public String delete(Long id) {
+    public String delete(@PathVariable("id") Long id) {
         combustivelService.delete(id);
         return "redirect:/combustivel/index";
     }

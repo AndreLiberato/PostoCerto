@@ -13,7 +13,7 @@ import com.ufrn.pds.postocerto.service.IPrecoService;
 import com.ufrn.pds.postocerto.model.Preco;
 
 @RestController
-@RequestMapping("/posto")
+@RequestMapping("/preco")
 public class PrecoController implements ICrudController<Preco, Long> {
 
     @Autowired
@@ -36,10 +36,10 @@ public class PrecoController implements ICrudController<Preco, Long> {
         return "redirect:/preco/index";
     }
 
-    @GetMapping("combustivel/{id}/show")
+    @GetMapping("/{id}/show")
     public String show(Model model, @PathVariable("id") Long id) {
         model.addAttribute("usuario", precoService.find(id).get());
-        return "combustivel/preco/show";
+        return "/{id}/show";
     }
 
     @GetMapping("/{id}/edit")
@@ -48,14 +48,14 @@ public class PrecoController implements ICrudController<Preco, Long> {
         return "combustivel/preco/edit";
     }
 
-    @PutMapping("/{id}/edit")
+    @PutMapping("/{id}/update")
     public String update(Preco entity, @PathVariable("id") Long id) {
         precoService.update(entity, id);
         return "redirect:/preco/index";
     }
 
     @DeleteMapping("/{id}/delete")
-    public String delete(Long id) {
+    public String delete(@PathVariable("id") Long id) {
         precoService.delete(id);
         return "redirect:/preco/index";
     }
