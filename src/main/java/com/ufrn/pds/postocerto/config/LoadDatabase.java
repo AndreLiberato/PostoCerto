@@ -29,9 +29,9 @@ public class LoadDatabase {
       UsuarioRepository usuarioRep, CombustivelRepository combustivelRep,PrecoRepository precoRep) {
 	  	
     return args -> {
-      log.info("Preloading " + repository.save(new Posto("Posto 1", "-23.5505", "-46.6333", 0.0)));
-      log.info("Preloading " + repository.save(new Posto("Posto 2", "51.5074", "-0.1278", 0.0)));
-      log.info("Preloading " + repository.save(new Posto("Posto 3", "40.7128", "-74.0060", 0.0)));
+      log.info("Preloading " + repository.save(new Posto("Posto Senador", "-35.23003062936271", "-5.822940123720272", 0.0)));
+      log.info("Preloading " + repository.save(new Posto("Posto 2", "-35.226331795196984", "-5.830829375937654", 0.0)));
+      log.info("Preloading " + repository.save(new Posto("Ale Sat", "-35.23233871992727", "-5.830047899539721", 0.0)));
       log.info("Preloading " + usuarioRep.save(new Usuario("Usuario 1", "40.7128", "-74.0060")));
       log.info("Preloading " + combustivelRep.save(new Combustivel("Gasolina")));
       log.info("Preloading " + precoRep.save(new Preco(20.0, now.toString())));
