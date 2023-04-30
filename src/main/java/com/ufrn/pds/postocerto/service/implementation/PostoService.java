@@ -56,4 +56,6 @@ public class PostoService implements IPostoService {
         }
         return postoRepository.save(existingPosto.get());
     }
+
+	
 }

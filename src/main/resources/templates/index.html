@@ -95,8 +95,7 @@
         });
 
         const marker = new mapboxgl.Marker()
-            .setLngLat([-35.21150448207374, -5.838191694648373])
-            .addTo(map);
+            
 
         map.on('click', (e) => {
             document.getElementById('info').innerHTML =
@@ -107,6 +106,35 @@
                 // `e.lngLat` is the longitude, latitude geographical position of the event.
                 JSON.stringify(e.lngLat.wrap());
         });
+      
+
+        fetch('/mapa/all')
+            .then(response => {
+                if (response.ok) {
+                return response.json(); // transforma a resposta em JSON
+                } else {
+                throw new Error('Erro ao buscar postos: ' + response.status + ' ' + response.statusText);
+                }
+            })
+            .then(data => {
+                // lista de postos retornada pela função
+               
+               
+                data.map((posto) => {
+                    const lat = Number(posto.latitude)
+                    const lng = Number(posto.longitude)
+                    
+                    const marker = new mapboxgl.Marker({
+                        color: '#F42330'
+                    })
+                        .setLngLat([lat, lng])
+                        .addTo(map);
+                });
+               
+            })
+            .catch(error => {
+                console.log(error);
+            });
     </script>
 </body>
 
