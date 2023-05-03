@@ -92,6 +92,7 @@
 
         geolocate.on('geolocate', (e) => {
             console.log(e.coords);
+            //obterCoordenadas(e.coords.latitude, e.coords.longitude)
         });
 
         const marker = new mapboxgl.Marker()
@@ -106,14 +107,15 @@
                 // `e.lngLat` is the longitude, latitude geographical position of the event.
                 JSON.stringify(e.lngLat.wrap());
         });
-      
+         
+        
 
-        fetch('/mapa/all')
+        fetch('/mapa/postos')
             .then(response => {
                 if (response.ok) {
-                return response.json(); // transforma a resposta em JSON
+                    return response.json(); // transforma a resposta em JSON
                 } else {
-                throw new Error('Erro ao buscar postos: ' + response.status + ' ' + response.statusText);
+                    throw new Error('Erro ao buscar postos: ' + response.status + ' ' + response.statusText);
                 }
             })
             .then(data => {
@@ -127,7 +129,7 @@
                     const marker = new mapboxgl.Marker({
                         color: '#F42330'
                     })
-                        .setLngLat([lat, lng])
+                        .setLngLat([lng, lat])
                         .addTo(map);
                 });
                

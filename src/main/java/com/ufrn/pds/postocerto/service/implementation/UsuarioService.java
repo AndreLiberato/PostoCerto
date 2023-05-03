@@ -53,7 +53,6 @@ public class UsuarioService implements IUsuarioService{
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if (usuario.isPresent()) {
             usuarioRepository.delete(usuario.get());
-            ;
         } else {
             throw new EntityNotFoundException(id);
         }    

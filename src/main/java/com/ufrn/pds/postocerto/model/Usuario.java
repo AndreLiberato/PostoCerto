@@ -11,8 +11,8 @@ public class Usuario {
     @GeneratedValue
     private Long id;
     private String nome;
-    private String latitude;
-    private String longitude;
+    private double latitude;
+    private double longitude;
 
     Usuario() {
         // Empty
@@ -22,7 +22,7 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public Usuario(String nome, String latitude, String longitude) {
+    public Usuario(String nome, double latitude, double longitude) {
         this.nome = nome;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -32,11 +32,11 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
@@ -48,11 +48,11 @@ public class Usuario {
         return nome;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 }
