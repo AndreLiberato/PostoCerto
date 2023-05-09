@@ -14,8 +14,8 @@ public class Posto implements Serializable {
     @GeneratedValue
     private Long id;
     private String nome;
-    private String latitude;
-    private String longitude;
+    private double  latitude;
+    private double  longitude;
     private double distancia;
 
     @OneToMany(mappedBy = "posto")
@@ -30,7 +30,7 @@ public class Posto implements Serializable {
         this.nome = nome;
     }
 
-    public Posto(String nome, String latitude, String longitude, double distancia) {
+    public Posto(String nome, double latitude, double longitude, double distancia) {
         this.nome = nome;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -51,11 +51,11 @@ public class Posto implements Serializable {
         this.nome = nome;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
@@ -71,11 +71,11 @@ public class Posto implements Serializable {
         return nome;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
