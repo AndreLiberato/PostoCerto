@@ -1,7 +1,6 @@
 package com.ufrn.pds.postocerto.config;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,12 +8,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.ufrn.pds.postocerto.controller.PrecoController;
 import com.ufrn.pds.postocerto.model.Combustivel;
 import com.ufrn.pds.postocerto.model.Posto;
 import com.ufrn.pds.postocerto.model.Preco;
 import com.ufrn.pds.postocerto.model.Usuario;
 import com.ufrn.pds.postocerto.repository.CombustivelRepository;
+import com.ufrn.pds.postocerto.repository.PostoCombustivelRepository;
 import com.ufrn.pds.postocerto.repository.PostoRepository;
 import com.ufrn.pds.postocerto.repository.PrecoRepository;
 import com.ufrn.pds.postocerto.repository.UsuarioRepository;
@@ -26,7 +25,7 @@ public class LoadDatabase {
   LocalDateTime now = LocalDateTime.now();
   @Bean
   CommandLineRunner initDatabase(PostoRepository repository, CombustivelRepository repositoryC,
-      UsuarioRepository usuarioRep, CombustivelRepository combustivelRep,PrecoRepository precoRep) {
+      UsuarioRepository usuarioRep, CombustivelRepository combustivelRep,PrecoRepository precoRep, PostoCombustivelRepository postCombRep) {
 	  	
     return args -> {
       log.info("Preloading " + repository.save(new Posto("Posto Senador", "-35.23003062936271", "-5.822940123720272", 0.0)));

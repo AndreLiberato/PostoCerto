@@ -1,19 +1,13 @@
 package com.ufrn.pds.postocerto.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ufrn.pds.postocerto.model.Posto;
-import com.ufrn.pds.postocerto.repository.PostoRepository;
 import com.ufrn.pds.postocerto.service.IPostoService;
 
 @RestController

@@ -25,6 +25,8 @@
 
                     <a class="btn btn-primary" th:href="@{/posto/{id}/edit(id=${posto.id})}">Editar</a>
 
+                    <a class="btn btn-primary" th:href="@{/posto/{id}/adicionarcombustivel(id=${posto.id})}">Preços</a>
+
                     <a class="btn btn-primary" th:attr="data-entity-id=${posto.id}" data-bs-toggle="modal"
                         data-bs-target="#confirmActionModal">
                         Excluir

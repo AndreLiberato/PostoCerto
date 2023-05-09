@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/usuario")
@@ -32,9 +33,10 @@ public class UsuarioController implements ICrudController<Usuario, Long> {
     }
 
     @GetMapping("/{id}/show")
-    public String show(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("usuario", usuarioService.find(id).get());
-        return "usuario/show";
+    public ModelAndView show(@PathVariable("id") Long id) {
+        ModelAndView mv = new ModelAndView("usuario/show");
+        mv.addObject("usuario", usuarioService.find(id).get());
+        return mv;
     }
 
     @GetMapping("/{id}/edit")

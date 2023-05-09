@@ -15,6 +15,46 @@
             <li th:text="${posto.distancia}"></li>
         </ul>
     </div>
+
+    <h5>Combustiveis</h5>
+    <div class="row">
+        <form th:action="@{/posto/{id}/adicionarcombustivel(id=${posto.id})}" method="post" class="col s8">
+            <div class="row">
+                <div class="input-field col s4">
+                    <label for="combustivel-input">Combustível</label>
+                    <input id="combustivel" name="combustivelid">
+                </div>
+                <div class="input-field col s4">
+                    <label class="active" for="preco">Preço</label>
+                    <input id="preco" name="preco">
+                </div>
+
+                <button type="submit" class="btn btn-primary col s2">Adicionar</button>
+
+            </div>
+        </form>
+
+    </div>
+    <table>
+        <table class="table">
+            <thead>
+                <th>Id</th>
+                <th>Combustível</th>
+                <th>Preço</th>
+            </thead>
+            <tbody>
+                <tr th:each="combustivel : ${combustiveis}">
+                    <td th:text="${combustivel.id}"></td>
+                    <td th:text="${combustivel.combustivelid}"></td>
+                    <td th:text="${combustivel.preco}"></td>
+                </tr>
+            </tbody>
+        </table>        
+
+
+    </table>
+
+
 </main>
 
 </html>

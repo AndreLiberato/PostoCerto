@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.ufrn.pds.postocerto.service.IPrecoService;
 import com.ufrn.pds.postocerto.model.Preco;
 
@@ -37,9 +39,10 @@ public class PrecoController implements ICrudController<Preco, Long> {
     }
 
     @GetMapping("/{id}/show")
-    public String show(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("preco", precoService.find(id).get());
-        return "preco/show";
+    public ModelAndView show(@PathVariable("id") Long id) {
+        ModelAndView mv = new ModelAndView("preco/show");
+        mv.addObject("preco", precoService.find(id).get());
+        return mv;
     }
 
     @GetMapping("/{id}/edit")

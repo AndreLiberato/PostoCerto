@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ufrn.pds.postocerto.model.Combustivel;
 import com.ufrn.pds.postocerto.service.ICombustivelService;
@@ -38,9 +39,10 @@ public class CombustivelController implements ICrudController<Combustivel, Long>
     }
 
     @GetMapping("/{id}/show")
-    public String show(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("combustivel", combustivelService.find(id).get());
-        return "combustivel/show";
+    public ModelAndView show(@PathVariable("id") Long id) {
+        ModelAndView mv = new ModelAndView("combustivel/show");
+        mv.addObject("combustivel", combustivelService.find(id).get());
+        return mv;
     }
 
     @GetMapping("/{id}/edit")

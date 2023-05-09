@@ -2,6 +2,7 @@ package com.ufrn.pds.postocerto.controller;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 
 public interface ICrudController<T, ID> {
@@ -12,7 +13,7 @@ public interface ICrudController<T, ID> {
 
     String store(@ModelAttribute T entity);
 
-    String show(Model model, @PathVariable ID id);
+    ModelAndView show(@PathVariable ID id);
 
     String edit(Model model, @PathVariable ID id);
 

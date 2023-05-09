@@ -57,5 +57,17 @@ public class PostoService implements IPostoService {
         return postoRepository.save(existingPosto.get());
     }
 
+    // @Transactional
+    // public Posto adicionarcombustivel(Long id, PostoCombustivel postocombustivel, Double preco){
+    //     Optional<Posto> existingPosto = postoRepository.findById(id);
+    //     if (existingPosto.isPresent()) {
+    //        // existingPosto.get().adicionarcombustivel(id, postocombustivel.getPosto(), preco );
+            
+    //     } else {
+    //         throw new EntityNotFoundException(id);
+    //     }
+    //     return postoRepository.save(existingPosto.get());
+    // }
+
 	
 }
