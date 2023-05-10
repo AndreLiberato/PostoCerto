@@ -33,7 +33,9 @@ public class LoadDatabase {
       log.info("Preloading " + repository.save(new Posto("Posto 1", -5.8304352, -35.2258257, 0.0)));
       log.info("Preloading " + repository.save(new Posto("Ale Sat", -5.825708113031226, -35.22986756711646, 0.0)));
       log.info("Preloading " + usuarioRep.save(new Usuario("Usuario 1", -5.8304352, -35.2258257)));
-//      log.info("Preloading " + combustivelRep.save(new Combustivel("Gasolina")));
+      log.info("Preloading " + combustivelRep.save(new Combustivel("Gasolina")));
+      log.info("Preloading " + combustivelRep.save(new Combustivel("Diesel")));
+      log.info("Preloading " + combustivelRep.save(new Combustivel("Etanol")));
 //      log.info("Preloading " + precoRep.save(new Preco(20.0, now.toString())));
     };
   }

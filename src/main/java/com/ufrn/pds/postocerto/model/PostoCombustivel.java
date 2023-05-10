@@ -1,6 +1,8 @@
 package com.ufrn.pds.postocerto.model;
 
 
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,14 +11,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class PostoCombustivel {
+public class PostoCombustivel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    //private PostoCombustivelId id;
-    private Long combustivelid;
+
     private Double preco;
     
     @ManyToOne()
@@ -27,19 +28,20 @@ public class PostoCombustivel {
     @JoinColumn(name = "combustivel_id")
     private Combustivel combustivel;
 
-    
+    public Combustivel getCombustivel() {
+        return combustivel;
+    }
+
+    public void setCombustivel(Combustivel combustivel) {
+        this.combustivel = combustivel;
+    }
+
+    public PostoCombustivel() {
+    }
+
     public PostoCombustivel(Long combustivelid, double preco, Posto posto) {
-        this.combustivelid = combustivelid;
         this.preco = preco;
         this.posto = posto;
-    }
-
-    public Long getCombustivelid() {
-        return combustivelid;
-    }
-
-    public void setCombustivelid(Long combustivelid) {
-        this.combustivelid = combustivelid;
     }
 
     public Long getId() {

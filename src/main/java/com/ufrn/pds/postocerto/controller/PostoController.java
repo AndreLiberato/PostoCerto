@@ -1,14 +1,19 @@
 package com.ufrn.pds.postocerto.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ufrn.pds.postocerto.model.Combustivel;
 import com.ufrn.pds.postocerto.model.Posto;
 import com.ufrn.pds.postocerto.model.PostoCombustivel;
+import com.ufrn.pds.postocerto.service.ICombustivelService;
 import com.ufrn.pds.postocerto.service.IPostoCombustivelService;
 import com.ufrn.pds.postocerto.service.IPostoService;
+
 import org.springframework.ui.Model;
 
 @Controller
@@ -19,13 +24,16 @@ public class PostoController implements ICrudController<Posto, Long> {
     private IPostoService postoService;
     @Autowired()
     private IPostoCombustivelService postoCombustivelService;
+    @Autowired()
+    private ICombustivelService combustivelService; 
+
 
     @GetMapping("/index")
     public String index(Model model) {
         model.addAttribute("postos", postoService.getAll());
         return "posto/index";
     }
-
+    
     @GetMapping("/create")
     public String create(Model model) {
         return "/posto/create";
@@ -41,15 +49,25 @@ public class PostoController implements ICrudController<Posto, Long> {
     public ModelAndView show(@PathVariable("id") Long id) {
 
         //public ModelAndView show(Model model, @PathVariable("id") Long id) {
-        // model.addAttribute("posto", postoService.find(id).get());
+            // model.addAttribute("posto", postoService.find(id).get());
         // model.addAttribute("combustiveis",postoCombustivelService.getPostoCombustiveisByPostoId(id) );
-
+        
         // return "posto/show";
-
+        
         ModelAndView mv = new ModelAndView("posto/show");
+        mv.addObject("postocombustivel",  new PostoCombustivel());
         mv.addObject("posto", postoService.find(id).get());
-        mv.addObject("combustiveis",postoCombustivelService.getPostoCombustiveisByPostoId(id) );
 
+        List<PostoCombustivel> combustiveisdoposto =  postoCombustivelService.getPostoCombustiveisByPostoId(id);
+        mv.addObject("combustiveis",combustiveisdoposto);
+
+        List<Combustivel> combustivelNaoAssociado = combustivelService.getAll();
+        for (PostoCombustivel postoCombustivel : combustiveisdoposto) {
+            combustivelNaoAssociado.remove(postoCombustivel.getCombustivel());
+            
+        }
+        mv.addObject("listacombustivel",combustivelNaoAssociado );
+        
         return mv;
 
     }
@@ -73,15 +91,16 @@ public class PostoController implements ICrudController<Posto, Long> {
     }
 
     @PostMapping("{id}/adicionarcombustivel")
-    public ModelAndView adicionarCombustivel(@ModelAttribute PostoCombustivel combustivel, @PathVariable("id") Long id)
+    public String adicionarCombustivel(@ModelAttribute PostoCombustivel postocombustivel, @PathVariable("id") Long id)
     {
         Posto posto = postoService.find(id).get();
-        combustivel.setPosto(posto);
-        postoCombustivelService.save(combustivel);
-        ModelAndView mv = new ModelAndView("posto/show");
-        mv.addObject("posto", posto);
-        mv.addObject("combustiveis",postoCombustivelService.getPostoCombustiveisByPostoId(id) );
+        postocombustivel.setPosto(posto);
+        postoCombustivelService.save(postocombustivel);
+        //ModelAndView mv = new ModelAndView("posto/show");
+        // mv.addObject("posto", posto);
+        // mv.addObject("combustiveis",postoCombustivelService.getPostoCombustiveisByPostoId(id) );
+        // mv.addObject("listacombustivel",combustivelService.getAll() );
 
-        return mv;
+        return "redirect:/posto/{id}/show";
     }
 }

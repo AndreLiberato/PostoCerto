@@ -18,12 +18,23 @@
 
     <h5>Combustiveis</h5>
     <div class="row">
-        <form th:action="@{/posto/{id}/adicionarcombustivel(id=${posto.id})}" method="post" class="col s8">
+        <form th:action="@{/posto/{id}/adicionarcombustivel(id=${posto.id})}" th:object="${postocombustivel}" method="post" class="col s12">
             <div class="row">
+                
+
                 <div class="input-field col s4">
-                    <label for="combustivel-input">Combustível</label>
-                    <input id="combustivel" name="combustivelid">
-                </div>
+                    <label>Combustivel</label>
+                    <select th:field="${postocombustivel.combustivel}">
+                        <option th:each="combus : ${listacombustivel}"
+                                    th:value="${combus.id}"
+                                    th:text="${combus.nome}">
+
+                        </option>
+
+                    </select>
+                </div> 
+
+                
                 <div class="input-field col s4">
                     <label class="active" for="preco">Preço</label>
                     <input id="preco" name="preco">
@@ -43,10 +54,10 @@
                 <th>Preço</th>
             </thead>
             <tbody>
-                <tr th:each="combustivel : ${combustiveis}">
-                    <td th:text="${combustivel.id}"></td>
-                    <td th:text="${combustivel.combustivelid}"></td>
-                    <td th:text="${combustivel.preco}"></td>
+                <tr th:each="combus : ${combustiveis}">
+                    <td th:text="${combus.id}"></td>
+                    <td th:text="${combus.combustivel.nome}"></td>
+                    <td th:text="${combus.preco}"></td>
                 </tr>
             </tbody>
         </table>        
