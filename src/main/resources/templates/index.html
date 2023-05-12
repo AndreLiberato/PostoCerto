@@ -7,9 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- MapBox.js -->
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+    <!-- <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script> -->
     <!-- MapBox.css -->
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+    <!-- <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' /> -->
+
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css" />
+
+
     <!-- JQuery -->
     <script th:src="@{/node_modules/jquery/dist/jquery.min.js}"></script>
     <!-- Bootstrap.js -->
@@ -62,14 +69,24 @@
     </main>
 
     <script>
+
+        
         mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kcmVsaWJlcmF0byIsImEiOiJjbGdjaDVjbTkwYWliM2VzOWJ6d3d1bm1wIn0.tC0xAy1fcBI9XQS8RimVMg';
+        navigator.geolocation.getCurrentPosition(success, error);
+        function success(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+
         const map = new mapboxgl.Map({
+            
             container: 'map', // container ID
             style: 'mapbox://styles/mapbox/streets-v12', // style URL
-            center: [-35.203842292018294, -5.832517075302604], // starting position [lng, lat]
+            //center: [-35.203842292018294, -5.832517075302604], // starting position [lng, lat]
+            center: [longitude, latitude], // starting position [lng, lat]
             zoom: 1, // starting zoom
             attributionControl: false,
             hash: true,
+            language: 'pt'
         });
 
         map.addControl(new mapboxgl.AttributionControl({
@@ -107,9 +124,14 @@
                 // `e.lngLat` is the longitude, latitude geographical position of the event.
                 JSON.stringify(e.lngLat.wrap());
         });
-         
         
-
+        var directions = new MapboxDirections({
+            accessToken: mapboxgl.accessToken,
+            unit: 'metric',
+            language: 'pt-br'
+        });        
+        map.addControl(directions, 'top-left');
+        
         fetch('/mapa/postos')
             .then(response => {
                 if (response.ok) {
@@ -121,22 +143,75 @@
             .then(data => {
                 // lista de postos retornada pela função
                
-               
+                
+                var destination = [0,0];
                 data.map((posto) => {
                     const lat = Number(posto.latitude)
                     const lng = Number(posto.longitude)
-                    
+                    destination = [Number(posto.longitude), Number(posto.latitude)];
                     const marker = new mapboxgl.Marker({
                         color: '#F42330'
                     })
-                        .setLngLat([lng, lat])
-                        .addTo(map);
+                    .setLngLat([lng, lat])
+                    .addTo(map);
+
+                    tracarrota(map, [longitude,latitude], destination, posto.nome);
+
+                    
                 });
+
                
             })
             .catch(error => {
                 console.log(error);
             });
+        }
+        
+        function error()
+        {
+            console.log('Erro ao obter a localização do usuário.');
+        }
+
+        function tracarrota(map, origem, destination, nome)
+        {
+            var url = 'https://api.mapbox.com/directions/v5/mapbox/driving/' +
+                          origem[0] + ',' + origem[1] + ';' +
+                          destination[0] + ',' + destination[1] +
+                          '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
+
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        var route = data.routes[0];
+                        var routeCoordinates = route.geometry.coordinates;
+
+                        // Adicionar a rota no mapa
+                        map.addLayer({
+                            'id': 'Posto ' + nome,
+                            'type': 'line',
+                            'source': {
+                                'type': 'geojson',
+                                'data': {
+                                    'type': 'Feature',
+                                    'properties': {},
+                                    'geometry': {
+                                        'type': 'LineString',
+                                        'coordinates': routeCoordinates
+                                    }
+                                }
+                            },
+                            'layout': {
+                                'line-join': 'round',
+                                'line-cap': 'round'
+                            },
+                            'paint': {
+                                'line-color': '#888',
+                                'line-width': 6
+                            }
+                        });
+                    }).catch(error => console.log(error));
+
+        }
     </script>
 </body>
 
