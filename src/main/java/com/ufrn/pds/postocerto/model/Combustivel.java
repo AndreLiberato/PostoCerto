@@ -1,50 +1,47 @@
 package com.ufrn.pds.postocerto.model;
 
-import java.io.Serializable;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Combustivel implements Serializable{
+public class Combustivel {
 
     @Id
     @GeneratedValue
     private Long id;
+
+    @Column(nullable = false, unique = true, length = 32)
     private String nome;
 
 	@OneToMany(mappedBy = "combustivel")
-    private List<PostoCombustivel> postos;// = new HashSet<Combustivel>();
+    private List<OfertaCombustivel> ofertaCombustivel;
 
-    Combustivel() {
+    @OneToMany(mappedBy = "combustivel")
+    private List<MudancaPreco> mudancaPreco;
+
+    public Combustivel() {
         // Empty
     }
     
     public Combustivel(String nome) {
         this.nome = nome;
     }
-    public void setId(Long id) {
-        this.id = id;
-    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
+
     public Long getId() {
-        return id;
+        return this.id;
     }
+
     public String getNome() {
-        return nome;
-    }
-
-    public List<PostoCombustivel> getPostos() {
-        return postos;
-    }
-
-    public void setPostos(List<PostoCombustivel> postos) {
-        this.postos = postos;
+        return this.nome;
     }
 
 }
