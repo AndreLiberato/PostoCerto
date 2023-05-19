@@ -25,8 +25,12 @@ public class PostoService implements IPostoService {
         return postoRepository.save(novoPosto);
     }
 
-    public Optional<Posto> find(Long id) {
-        return postoRepository.findById(id);
+    public Optional<Posto> find(Long id) throws EntityNotFoundException {
+        Optional<Posto> posto = postoRepository.findById(id);
+        if (!posto.isPresent()) {
+            throw new EntityNotFoundException(id);
+        }
+        return posto;
     }
 
     public List<Posto> find(List<Long> id) {
