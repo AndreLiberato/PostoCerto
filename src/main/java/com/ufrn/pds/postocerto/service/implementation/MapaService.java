@@ -8,8 +8,10 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.stereotype.Service;
 
 import com.ufrn.pds.postocerto.model.Posto;
+import com.ufrn.pds.postocerto.model.PostoCombustivel;
 import com.ufrn.pds.postocerto.repository.PostoRepository;
 import com.ufrn.pds.postocerto.repository.UsuarioRepository;
+import com.ufrn.pds.postocerto.service.IPostoCombustivelService;
 
 import jakarta.transaction.Transactional;
 @Service
@@ -19,6 +21,9 @@ public class MapaService {
 	
 	@Autowired
     private UsuarioRepository usuarioRepository;
+	
+	@Autowired()
+    private IPostoCombustivelService postoCombustivelService;
 	
 	@Transactional
 	public List<Posto> mostrarPostosMaisProximos() {
@@ -33,13 +38,15 @@ public class MapaService {
 	     double latUser = usuarioRepository.findById(userID).get().getLatitude();
 	     double lngUser = usuarioRepository.findById(userID).get().getLongitude();
 	     
+	     
 	     for (Posto posto : postos) { 
-	
+	    	// posto.getCombustiveis();
+	    	// List<PostoCombustivel> combustiveisdoposto = postoCombustivelService.getPostoCombustiveisByPostoId(posto.getId());
 	         double distancia = distanciaEntreCoordenadas(latUser, lngUser, posto.getLatitude(), posto.getLongitude()); // em metros
 	         
 	         if (distancia <= raioBusca) {
 	     	    posto.setDistancia(distancia);
-	            postosProximos.add(new Posto(posto.getNome(), posto.getLatitude(), posto.getLongitude(), distancia));
+	            postosProximos.add(new Posto(posto.getNome(), posto.getLatitude(), posto.getLongitude(), posto.getCombustiveis(), distancia));
 	         } 
 	     }
     // Collections.sort(postosProximos, new Comparator<Posto>() {
