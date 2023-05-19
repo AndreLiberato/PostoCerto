@@ -149,12 +149,20 @@
                     const lat = Number(posto.latitude)
                     const lng = Number(posto.longitude)
                     destination = [Number(posto.longitude), Number(posto.latitude)];
+                    
                     const marker = new mapboxgl.Marker({
-                        color: '#F42330'
+                        color: '#F42330',
+                        
                     })
                     .setLngLat([lng, lat])
+                    .setPopup(
+                        new mapboxgl.Popup({ offset: 25 }) // add popups
+                        .setHTML(
+                            `<h4>${posto.nome}</h4><p>${posto.latitude}</p>`
+                        )
+                    )
                     .addTo(map);
-
+                    
                     tracarrota(map, [longitude,latitude], destination, posto.nome);
 
                     

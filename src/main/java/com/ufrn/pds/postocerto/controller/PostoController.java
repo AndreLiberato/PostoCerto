@@ -58,7 +58,7 @@ public class PostoController implements ICrudController<Posto, Long> {
         mv.addObject("postocombustivel",  new PostoCombustivel());
         mv.addObject("posto", postoService.find(id).get());
 
-        List<PostoCombustivel> combustiveisdoposto =  postoCombustivelService.getPostoCombustiveisByPostoId(id);
+        List<PostoCombustivel> combustiveisdoposto = postoCombustivelService.getPostoCombustiveisByPostoId(id);
         mv.addObject("combustiveis",combustiveisdoposto);
 
         List<Combustivel> combustivelNaoAssociado = combustivelService.getAll();
