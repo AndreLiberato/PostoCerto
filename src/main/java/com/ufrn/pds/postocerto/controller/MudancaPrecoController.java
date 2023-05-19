@@ -10,16 +10,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.ufrn.pds.postocerto.service.IPrecoService;
-import com.ufrn.pds.postocerto.model.Preco;
+import com.ufrn.pds.postocerto.service.IMudancaPrecoService;
+import com.ufrn.pds.postocerto.model.MudancaPreco;
 
 @Controller
 @RequestMapping("/preco")
-public class PrecoController implements ICrudController<Preco, Long> {
+public class MudancaPrecoController implements ICrudController<MudancaPreco, Long> {
 
     @Autowired
-    private IPrecoService precoService;
+    private IMudancaPrecoService precoService;
 
     @GetMapping("/index")
     public String index(Model model) {
@@ -33,7 +32,7 @@ public class PrecoController implements ICrudController<Preco, Long> {
     }
 
     @PostMapping("/store")
-    public String store(Preco entity) {
+    public String store(MudancaPreco entity) {
         precoService.save(entity);
         return "redirect:/preco/index";
     }
@@ -52,7 +51,7 @@ public class PrecoController implements ICrudController<Preco, Long> {
     }
 
     @PutMapping("/{id}/update")
-    public String update(Preco entity, @PathVariable("id") Long id) {
+    public String update(MudancaPreco entity, @PathVariable("id") Long id) {
         precoService.update(entity, id);
         return "redirect:/preco/index";
     }

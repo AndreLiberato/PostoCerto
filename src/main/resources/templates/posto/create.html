@@ -3,9 +3,8 @@
 
 <main>
     <form action="#" method="post" th:action="@{/posto/store}" th:object="${posto}">
-
         <label for="nome-input">Nome</label>
-        <input type="text" name="nome" id="nome-input">
+        <input required type="text" name="nome" id="nome-input">
         <br>
         <label for="latitude-input">Latitude</label>
         <input type="text" name="latitude" id="latitude-input">

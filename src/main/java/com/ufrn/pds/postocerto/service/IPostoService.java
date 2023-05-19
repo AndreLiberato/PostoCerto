@@ -4,6 +4,4 @@ import com.ufrn.pds.postocerto.model.Posto;
 
 public interface IPostoService extends ICrudService<Posto, Long> {
    
-
-	
 }

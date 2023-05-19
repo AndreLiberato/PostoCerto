@@ -1,19 +1,13 @@
 package com.ufrn.pds.postocerto.controller;
 
-import java.util.List;
-
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.ufrn.pds.postocerto.model.Combustivel;
+import com.ufrn.pds.postocerto.exception.EntityNotFoundException;
 import com.ufrn.pds.postocerto.model.Posto;
-import com.ufrn.pds.postocerto.model.PostoCombustivel;
-import com.ufrn.pds.postocerto.service.ICombustivelService;
-import com.ufrn.pds.postocerto.service.IPostoCombustivelService;
 import com.ufrn.pds.postocerto.service.IPostoService;
-
 import org.springframework.ui.Model;
 
 @Controller
@@ -22,21 +16,23 @@ public class PostoController implements ICrudController<Posto, Long> {
 
     @Autowired()
     private IPostoService postoService;
-    @Autowired()
-    private IPostoCombustivelService postoCombustivelService;
-    @Autowired()
-    private ICombustivelService combustivelService; 
 
+    // @Autowired()
+    // private IOfertaCombustivelService ofertaCombustivelService;
+    
+    // @Autowired()
+    // private ICombustivelService combustivelService;
 
     @GetMapping("/index")
     public String index(Model model) {
         model.addAttribute("postos", postoService.getAll());
         return "posto/index";
     }
-    
+
     @GetMapping("/create")
     public String create(Model model) {
-        return "/posto/create";
+        model.addAttribute("posto", new Posto());
+        return "posto/create";
     }
 
     @PostMapping("/store")
@@ -47,29 +43,15 @@ public class PostoController implements ICrudController<Posto, Long> {
 
     @GetMapping("/{id}/show")
     public ModelAndView show(@PathVariable("id") Long id) {
-
-        //public ModelAndView show(Model model, @PathVariable("id") Long id) {
-            // model.addAttribute("posto", postoService.find(id).get());
-        // model.addAttribute("combustiveis",postoCombustivelService.getPostoCombustiveisByPostoId(id) );
-        
-        // return "posto/show";
-        
         ModelAndView mv = new ModelAndView("posto/show");
-        mv.addObject("postocombustivel",  new PostoCombustivel());
-        mv.addObject("posto", postoService.find(id).get());
-
-        List<PostoCombustivel> combustiveisdoposto = postoCombustivelService.getPostoCombustiveisByPostoId(id);
-        mv.addObject("combustiveis",combustiveisdoposto);
-
-        List<Combustivel> combustivelNaoAssociado = combustivelService.getAll();
-        for (PostoCombustivel postoCombustivel : combustiveisdoposto) {
-            combustivelNaoAssociado.remove(postoCombustivel.getCombustivel());
-            
+        try {
+            Optional<Posto> posto = postoService.find(id);
+            mv.addObject("posto", posto.get());
+        } catch (EntityNotFoundException e) {
+            mv.setViewName("error");
+            mv.addObject("message", "Ocorreu um erro ao exibir o posto: " + e.getMessage());
         }
-        mv.addObject("listacombustivel",combustivelNaoAssociado );
-        
         return mv;
-
     }
 
     @GetMapping("/{id}/edit")
@@ -90,17 +72,4 @@ public class PostoController implements ICrudController<Posto, Long> {
         return "redirect:/posto/index";
     }
 
-    @PostMapping("{id}/adicionarcombustivel")
-    public String adicionarCombustivel(@ModelAttribute PostoCombustivel postocombustivel, @PathVariable("id") Long id)
-    {
-        Posto posto = postoService.find(id).get();
-        postocombustivel.setPosto(posto);
-        postoCombustivelService.save(postocombustivel);
-        //ModelAndView mv = new ModelAndView("posto/show");
-        // mv.addObject("posto", posto);
-        // mv.addObject("combustiveis",postoCombustivelService.getPostoCombustiveisByPostoId(id) );
-        // mv.addObject("listacombustivel",combustivelService.getAll() );
-
-        return "redirect:/posto/{id}/show";
-    }
 }

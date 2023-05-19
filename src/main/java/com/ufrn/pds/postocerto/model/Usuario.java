@@ -1,5 +1,6 @@
 package com.ufrn.pds.postocerto.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -10,6 +11,8 @@ public class Usuario {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Column(nullable = false, length = 64)
     private String nome;
     private double latitude;
     private double longitude;

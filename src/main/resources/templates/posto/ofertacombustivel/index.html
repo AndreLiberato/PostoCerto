@@ -1,36 +1,28 @@
 <!DOCTYPE html>
-<html th:include="~{template :: layout (~{:: main}, 'Postos de Combustível', ~{:: script})}">
+<html th:include="~{template :: layout (~{:: main}, 'Combustível do Posto', ~{:: script})}">
 
 <main>
-    <h1>Postos de Combustível</h1>
-    <a th:href="@{/posto/create}">Novo Posto</a>
+    <h1>Posto <span th:text="${posto.id}"></span></h1>
+    <a th:href="@{/posto/{postoId}/ofertacombustivel/create(postoId=${posto.id})}">Adicionar combustível</a>
     <table class="table">
         <thead>
             <th>#</th>
-            <th>Nome</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
-            <th>Distância</th>
+            <th>Tipo de Combustível</th>
+            <th>Preço</th>
             <th>Ações</th>
         </thead>
         <tbody>
-            <tr th:each="posto : ${postos}">
-                <td th:text="${posto.id}"></td>
-                <td th:text="${posto.nome}"></td>
-                <td th:text="${posto.latitude}"></td>
-                <td th:text="${posto.longitude}"></td>
-                <td th:text="${posto.distancia}"></td>
+            <tr th:each="ofertaCombustivel : ${ofertaCombustiveis}">
+                <td th:text="${ofertaCombustivel.id}"></td>
+                <td th:text="${ofertaCombustivel.combustivel.nome}"></td>
+                <td th:text="${ofertaCombustivel.preco}"></td>
                 <td>
-                    <a class="btn btn-primary" th:href="@{/posto/{id}/show(id=${posto.id})}">Visualizar</a>
+                    <a class="btn btn-primary" th:href="@{/posto/{postoId}/ofertacombustivel/{id}/edit(postoId=${posto.id},id=${ofertaCombustivel.id})}">Editar</a>
 
-                    <a class="btn btn-primary" th:href="@{/posto/{id}/edit(id=${posto.id})}">Editar</a>
-
-                    <a class="btn btn-primary" th:attr="data-entity-id=${posto.id}" data-bs-toggle="modal"
+                    <a class="btn btn-primary" th:attr="data-entity-id=${ofertaCombustivel.id}" data-bs-toggle="modal"
                         data-bs-target="#confirmActionModal">
                         Excluir
                     </a>
-
-                    <a class="btn btn-primary" th:href="@{/posto/{postoId}/ofertacombustivel/index(postoId=${posto.id})}">Combustível</a>
                 </td>
             </tr>
         </tbody>
@@ -45,7 +37,7 @@
                     <h1 class="modal-title fs-5" id="confirmActionModalLabel">Confirmação de ação</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="confirmActionForm" th:method="delete" th:action="@{#}">
+                <form id="confirmActionForm" th:method="delete" th:action="@{/posto/{postoId}/ofertacombustivel(postoId=${posto.id})}">
                     <div class="modal-body">
                         <p>Você deseja tem certeza que deseja excluir este item?</p>
                     </div>
@@ -57,13 +49,15 @@
             </div>
         </div>
     </div>
+
 </main>
 
 <script>
     $(() => {
         $('a[data-bs-target="#confirmActionModal"]').on("click", function () {
             const id = $(this).attr("data-entity-id");
-            const action_uri = `/posto/${id}/delete`;
+            let action_uri = $("#confirmActionForm").attr("action");
+            action_uri += `/${id}/delete`;
             $("#confirmActionForm").attr("action", action_uri);
         });
     });

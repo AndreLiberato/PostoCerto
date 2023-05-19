@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.ufrn.pds.postocerto.exception.EntityNotFoundException;
 import com.ufrn.pds.postocerto.model.Combustivel;
 import com.ufrn.pds.postocerto.repository.CombustivelRepository;
@@ -13,7 +12,6 @@ import com.ufrn.pds.postocerto.service.ICombustivelService;
 @Service
 public class CombustivelService implements ICombustivelService {
 	
-	 
     @Autowired
 	private CombustivelRepository combustivelRepository;
 
@@ -52,4 +50,5 @@ public class CombustivelService implements ICombustivelService {
     		 throw new EntityNotFoundException(id);
     	}
     }
+    
 }
