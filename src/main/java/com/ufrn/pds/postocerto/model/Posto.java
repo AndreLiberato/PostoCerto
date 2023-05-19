@@ -39,6 +39,14 @@ public class Posto {
         this.longitude = longitude;
         this.distancia = distancia;
     }
+    
+    public Posto(String nome, double latitude, double longitude,List<PostoCombustivel> combustiveis, double distancia) {
+        this.nome = nome;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.distancia = distancia;
+        this.combustiveis = combustiveis;
+    }
 
     public void setNome(String nome) {
         this.nome = nome;

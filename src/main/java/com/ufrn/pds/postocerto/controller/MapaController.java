@@ -1,13 +1,21 @@
 package com.ufrn.pds.postocerto.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Optional;
+=======
+
+>>>>>>> 122c32df8d4523eb5f9daf7c3305b8536c6d0d9e
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 122c32df8d4523eb5f9daf7c3305b8536c6d0d9e
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ufrn.pds.postocerto.model.Posto;
+<<<<<<< HEAD
 import com.ufrn.pds.postocerto.model.Usuario;
 import com.ufrn.pds.postocerto.service.IPostoService;
 import com.ufrn.pds.postocerto.service.IUsuarioService;
@@ -69,6 +77,21 @@ public class MapaController {
 		double distancia = R * c;
 
 		return distancia;
+=======
+
+import com.ufrn.pds.postocerto.service.implementation.MapaService;
+
+@RestController
+@RequestMapping("/mapa")
+public class MapaController {
+
+	@Autowired
+	private MapaService mapaService;
+
+	@GetMapping("/postos")
+	public List<Posto> mostrarPostosMaisProximos() {
+		return mapaService.mostrarPostosMaisProximos();
+>>>>>>> 122c32df8d4523eb5f9daf7c3305b8536c6d0d9e
 	}
 
 }
