@@ -5,9 +5,15 @@ import java.util.List;
 import com.ufrn.pds.postocerto.model.Combustivel;
 import com.ufrn.pds.postocerto.model.PostoCombustivel;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class CombustivelDTO {
     private Long id;
+    @NotBlank(message = "O campo 'nome' não pode estar em branco.")
     private String nome;
+    
+    @NotNull(message = "A lista de postos não pode ser nula.")
     private List<PostoCombustivel> postos;
 
     public CombustivelDTO() {
@@ -19,6 +25,7 @@ public class CombustivelDTO {
         this.nome = nome;
         this.postos = postos;
     }
+    
     public CombustivelDTO(Combustivel combustivel) {
 		id = combustivel.getId();
 		nome = combustivel.getNome();

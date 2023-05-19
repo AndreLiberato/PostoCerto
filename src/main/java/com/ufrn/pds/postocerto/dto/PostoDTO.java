@@ -4,18 +4,31 @@ import java.util.List;
 import com.ufrn.pds.postocerto.model.Posto;
 import com.ufrn.pds.postocerto.model.PostoCombustivel;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class PostoDTO {
     private Long id;
+    
+    @NotBlank(message = "O campo 'nome' não pode estar em branco.")
     private String nome;
+    
+    @NotNull(message = "O campo 'latitude' não pode estar nulo.")
     private double latitude;
+    
+    @NotNull(message = "O campo 'longitude' não pode estar nulo.")
     private double longitude;
+    
     private double distancia;
+    
+    @Size(min = 1, message = "Dever conter pelo menos um combustível.")
     private List<PostoCombustivel> combustiveis;
 
     public PostoDTO() {
         // Construtor vazio
     }
-
+    
     public PostoDTO(Long id, String nome, double latitude, double longitude, double distancia, List<PostoCombustivel> combustiveis) {
         this.id = id;
         this.nome = nome;

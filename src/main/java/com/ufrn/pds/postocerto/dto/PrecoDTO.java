@@ -1,10 +1,20 @@
 package com.ufrn.pds.postocerto.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.ufrn.pds.postocerto.model.Preco;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class PrecoDTO {
     private Long id;
+    
+    @NotNull(message = "O campo 'valor' não pode estar nulo.")
     private double valor;
+    
+    @NotBlank(message = "O campo 'data' não pode estar em branco.")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String dataHora;
 
     public PrecoDTO() {

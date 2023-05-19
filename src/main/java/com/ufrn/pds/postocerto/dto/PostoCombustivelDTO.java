@@ -1,10 +1,17 @@
 package com.ufrn.pds.postocerto.dto;
 
+import jakarta.validation.constraints.NotNull;
 
 public class PostoCombustivelDTO {
     private Long id;
+    
+    @NotNull(message = "O campo 'preco' não pode estar nulo.")
     private Double preco;
+    
+    @NotNull(message = "o campo 'posto' não pode ser nulo.")
     private PostoDTO posto;
+    
+    @NotNull(message = "o campo 'combustivel' não pode ser nulo.")
     private CombustivelDTO combustivel;
 
     public PostoCombustivelDTO() {

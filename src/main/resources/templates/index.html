@@ -144,7 +144,7 @@
                 // lista de postos retornada pela função
                
                 
-                var destination = [0,0];
+              //  var destination = [0,0];
                 data.map((posto) => {
                     const lat = Number(posto.latitude)
                     const lng = Number(posto.longitude)
@@ -163,7 +163,7 @@
                     )
                     .addTo(map);
                     
-                    tracarrota(map, [longitude,latitude], destination, posto.nome);
+                   // tracarrota(map, [longitude,latitude], destination, posto.nome);
 
                     
                 });
