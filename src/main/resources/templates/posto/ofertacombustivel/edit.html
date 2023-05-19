@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html th:replace="~{template :: layout (~{:: main}, 'Criar novo Posto', ~{})}">
+
+<main>
+    <div class="d-flex justify-content-center pt-3">
+        <form th:method="put" th:action="@{/posto/{postoId}/ofertacombustivel/{id}/update(postoId=${posto.id},id=${ofertaCombustivel.id})}" th:object="${ofertaCombustivel}">
+
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="combustivel-select">Combustivel</label>
+                <select required class="form-select" name="combustivelId" id="combustivel-select">
+                    <option th:each="combustivel : ${combustiveis}" th:value="${combustivel.id}"
+                        th:text="${combustivel.nome}" th:selected="${ofertaCombustivel.combustivel.id == combustivel.id}"></option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="preco-input">Preço</label>
+                <input required th:field="*{preco}" class="form-control" type="number" name="preco" id="preco-input">
+            </div>
+
+            <button class="btn btn-primary" type="submit">Salvar</button>
+        </form>
+    </div>
+</main>
+
+</html>
