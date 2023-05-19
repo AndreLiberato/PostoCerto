@@ -18,75 +18,21 @@ import com.ufrn.pds.postocerto.model.Usuario;
 
 import com.ufrn.pds.postocerto.service.IPostoService;
 import com.ufrn.pds.postocerto.service.IUsuarioService;
+import com.ufrn.pds.postocerto.service.implementation.MapaService;
 
 
 @RestController
 @RequestMapping("/mapa")
-public class MapaController implements IMapaPostos<Posto, Long>  {
+public class MapaController {
 	@Autowired
 	private IPostoService postoService;
 	
 	@Autowired
-	private IUsuarioService usuarioService;
-	
-	@GetMapping("/all")
-    public List<Posto> findAll() {
-        return postoService.getAll();
-    }
-	
-	@GetMapping("/user")
-    public Optional<Usuario> userAll() {
-		long userID = 1;
-        return usuarioService.find(userID);
-    }
-	 
+	private MapaService mapaService;
 
 	@GetMapping("/postos")
 	public List<Posto> mostrarPostosMaisProximos() {
-		 long userID = 1;
-	
-	     List<Posto> postos = postoService.getAll();
-	     List<Posto> postosProximos = new ArrayList<>();
-	     
-	     double raioBusca = 15.0; // km
-	     double raioBuscaMetros = raioBusca * 1000; // converter para metros
-
-	     for (Posto posto : postos) { 
-	         double latUser = usuarioService.find(userID).get().getLatitude();
-	         double lngUser = usuarioService.find(userID).get().getLongitude();
-	
-	         double distancia = distanciaEntreCoordenadas(latUser, lngUser, posto.getLatitude(), posto.getLongitude()); // em metros
-	         
-	         if (distancia <= raioBusca) {
-	     	    posto.setDistancia(distancia);
-	            postosProximos.add(new Posto(posto.getNome(), posto.getLatitude(), posto.getLongitude(), distancia));
-	         } 
-	     }
-     // Collections.sort(postosProximos, new Comparator<Posto>() {
-     //     public int compare(Posto p1, Posto p2) {
-     //         return Double.compare(p1.getDistancia(), p2.getDistancia());
-     //     }
-     // });
-
-	     return postosProximos;
+		 return mapaService.mostrarPostosMaisProximos();
 	}
-	
-	
 
-	 private static double distanciaEntreCoordenadas(double lat1, double lon1, double lat2, double lon2) {
-		
-		 final int R = 6371; // raio médio da Terra em km
-		 double dLat = Math.toRadians(lat2 - lat1);
-		 double dLon = Math.toRadians(lon2 - lon1);
-		    
-		 double a = Math.pow(Math.sin(dLat / 2), 2) + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.pow(Math.sin(dLon / 2), 2);
-		 double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-		    
-		 double distancia = R * c;
-		    
-		 return distancia;    
-	 }
-	
-	
-	
 }
